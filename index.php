@@ -14,13 +14,13 @@
 <body>
     <div class="flex">
         <div class="sidenav">
-            <img src="//theme.hstatic.net/1000357687/1000521705/14/ft-logo.png?v=145" style="background-color: gray; margin-top:-20px; width: 100%">
+            <img src="//theme.hstatic.net/1000357687/1000521705/14/ft-logo.png?v=145" style="background-color: gray; margin-top:-20gitpx; width: 100%">
             <button class="dropdown-btn">Khách hàng
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
                 <a href="listKhachHang.php">Danh sách khách hàng</a>
-                <a href="#">Thêm khách hàng</a>
+                <a href="ThemKhachHang.php">Thêm khách hàng</a>
             </div>
             <button class="dropdown-btn">Sản phẩm
                 <i class="fa fa-caret-down"></i>
@@ -30,8 +30,11 @@
                 <a href="#">Thêm sản phẩm</a>
                 <a href="#">Thêm sản phẩm</a>
             </div>
+            <button class="dropdown-btn">Hóa đơn
+                <i class="fa fa-caret-down"></i>
+            </button>
             <div class="dropdown-container">
-                <a href="#">Danh sách hóa đơn</a>
+                <a href="ListHoaDon.php">Danh sách hóa đơn</a>
             </div>
         </div>
         <div>

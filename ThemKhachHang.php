@@ -29,6 +29,8 @@
                 <input type="text" class="form-control" id="diachi" placeholder="Địa chỉ">
                 <br>
                 <input type="button" name="insert_data" id="button_insert" value="Insert" class="btn btn-success">
+                <!-- <input type="button" value="Close" class="btn btn-danger" > -->
+                <input type="button" value="Go back" onClick="javascript:history.go(-1)"  class="btn btn-danger"/>
             </form>
         </div>
     </div>

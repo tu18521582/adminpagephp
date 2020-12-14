@@ -29,27 +29,26 @@
 </div>form
 <div class="recovery">Forgot your password? <a href="#">Click here</a></div> -->
 
-<div class="form">
-    <div class="avi"></div>
-    <form action='' method='post'>
-    <input type="text" value="Username" onfocus="this.value='';" name='name'/>
-    <input type="text" value="Password" onfocus="this.value='';" name='password'/>
-    <input type="submit" value="Login" action="submit" name='submit'/>
-  </form>
-</div><!--form-->
-<div class="recovery">Forgot your password? <a href="#">Click here</a></div>
 
 
+    <div class="form">
+        <div class="avi"></div>
+        <form action='' method='post'>
+        <input type="text" value="Username" onfocus="this.value='';" name='name'/>
+        <input type="text" value="Password" onfocus="this.value='';" name='password'/>
+        <input type="submit" value="Login" action="submit" name='submit'/>
+    </form>
+    </div><!--form-->
+    </div>
     <?php 
         include '../connect.php';
         if(isset($_POST['submit'])){
-            $name=mysqli_real_escape_string($connect, $_POST['name']);
-            $password=mysqli_real_escape_string($connect, $_POST['password']);
-            // $password=md5($password);
-            if($name=='admin' && $password='123456'){
+            if($_POST['name']=='admin' && $_POST['password']=='123456'){
                 header ('Location: ../index.php');
             }
-                 
+            else {
+                echo "Bạn nhập sai tài khoản hoặc mật khẩu";
+            }
         }?>
     
 </body>
