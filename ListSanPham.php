@@ -8,13 +8,14 @@
 
     <!-- Latest compiled and minified CSS & JS -->
     <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="img.css">
     <script src="jquery.js"></script>
     
 </head>
 
 <body>
     <div class="navbar navbar-inverse">
-        <a class="navbar-brand" href="#">Hóa đơn</a>
+        <a class="navbar-brand" href="#">Sản phẩm</a>
         <ul class="nav navbar-nav">
             <li class="active">
                 <a href="index.php">Home</a>
@@ -32,7 +33,7 @@
     <div class="modal-content">
         <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sửa thông tin khách hàng</h4>
+        <h4 class="modal-title">Sửa thông tin sản phẩm</h4>
         </div>
         <div class="modal-body">
 
@@ -48,19 +49,18 @@
     <?php 
         include "connect.php";
         // include "XoaKhachHang.php";
-        $selectKH = "select * from hoadon";
+        $selectKH = "select * from sanpham";
         $rs = $connect->query($selectKH);
         echo "<table class='table table-hover'>
         <thead>
             <tr>
-                <th>Mã hóa đơn</th>
-                <th>Mã khách hàng</th>
-                <th>Ngày hóa đơn</th>
-                <th>Tổng số lượng</th>
-                <th>Tổng cộng</th>
-                <th>Giảm giá</th>
-                <th>Thành tiền</th>
-                <th>Ghi chú</th>
+                <th>Mã sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Mã loại</th>
+                <th>Mô tả</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Hình ảnh</th>
                 <th>Chức năng</th>
             </tr>
         </thead>
@@ -70,16 +70,15 @@
         {
           echo "<tr id='$row[0]'>
                     <td >$row[0]</td>
-                    <td data-target='makh'>$row[1]</td>
-                    <td data-target='ngayhd'>$row[2]</td>
-                    <td data-target='tongsl'>$row[3]</td>
-                    <td data-target='tongcong'>$row[4]</td>
-                    <td data-target='giamgia'>$row[5]</td>
-                    <td data-target='thanhtien'>$row[6]</td>
-                    <td data-target='ghichu'>$row[7]</td>
+                    <td >$row[1]</td>
+                    <td >$row[2]</td>
+                    <td >$row[8]</td>
+                    <td >$row[9]</td>
+                    <td >$row[10]</td>
+                    <td><img class='img-des' src='$row[3]'></td>
                     <td>
-                    <button class='btn btn-danger delete' iddelete='$row[0]'>Xóa</button>
-                    <button class='btn btn-success chitiet' data-toggle='modal' data-target='#myModal' chitietid='$row[0]'>Chi tiết</button>
+                    <button class='btn btn-danger delete' iddelete='$row[0]' style='margin-bottom: 7px'>Xóa</button>
+                    <button class='btn btn-success chitiet' data-toggle='modal' data-target='#myModal'>Cập nhật</button>
                     </td>
                 </tr>";
         }
@@ -88,15 +87,17 @@
               </table>";
     ?>
     <script>
-    //chi tiet hoa don
-        $('.chitiet').click(function (){
-            var mahd = $(this).attr('chitietid');
+    //xoa san pham
+        $(document).on('click', '.delete', function(){
+            var masp = $(this).attr('iddelete');
+            $(this).parent().parent().remove();
             $.ajax({
                 url: 'ajax_action.php',
                 method: 'POST',
-                data:{mahd:mahd},
-                success: function(data) {
-                    $(".modal-body").html(data);
+                data:{masp:masp},
+                success: function(data){
+                    // alert('Delete success');
+                    alert('Xóa thành công');
                 }
             })
         })

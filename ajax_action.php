@@ -1,14 +1,13 @@
 <?php 
     include "connect.php";
     //them
-    if (isset($_POST['makh'])) {
-        $makh=$_POST['makh'];
+    if (isset($_POST['hovaten'])) {
+        echo 'sad';
         $hovaten = $_POST['hovaten'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $diachi = $_POST['diachi'];
-        // $sql= "INSERT INTO `khachhang` (MAKH, HOTEN, MATKHAU, EMAIL, SDT, DIACHI) VALUES ('$makh', '$hovaten', '$matkhau', '$email', '$phone', '$diachi')";
-        $result=mysqli_query($con, "INSERT INTO KHACHHANG (`MAKH`, `HOTEN`, `EMAIL`, `SDT`, `DIACHI`) VALUES ('$makh', '$hovaten', '$email', '$phone', '$diachi')");
+        $result=mysqli_query($con, "INSERT INTO KHACHHANG (`MAKH`, `HOTEN`, `EMAIL`, `SDT`, `DIACHI`) VALUES ('', '$hovaten', '$email', '$phone', '$diachi')");
         if($result) {
             echo $result;
         }
@@ -55,4 +54,24 @@
             ";
         }
     };
+
+
+    //xu ly anh
+    if (isset($_POST['tensp'])) {
+        $tensp = $_POST['tensp'];
+        $maloai = $_POST['maloai'];
+        $hinh = $_POST['hinh'];
+        $mota = $_POST['mota'];
+        $gia = $_POST['gia'];
+        $soluong = $_POST['soluong'];
+        
+        $result=mysqli_query($con, "INSERT INTO sanpham VALUES ('', '$tensp', '$maloai', '$hinh', '','','','','$mota','$gia','$soluong')");
+    }
+
+    //xoa san pham
+    if (isset($_POST['masp'])) {
+        $masp = $_POST['masp'];
+
+        $result = mysqli_query($con, "DELETE FROM SANPHAM WHERE MASP='$masp'");
+    }
 ?>

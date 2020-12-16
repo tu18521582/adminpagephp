@@ -15,18 +15,20 @@
 <body>
     <div class="container">
         <div class="col-md-12">
-            <h3>Them khach hang</h3>
+            <h3>Thêm sản phẩm</h3>
             <form action='ajax_action.php' method="post" id="insert_data_kh">
-                <!-- <label>Mã khách hàng</label>
-                <input type="text" class="form-control" id="makh" placeholder="Mã khách hàng"> -->
-                <label>Họ và tên</label>
-                <input type="text" class="form-control" id="hovaten" placeholder="Điền vào họ tên" name='hovaten'>
-                <label>Email</label>
-                <input type="text" class="form-control" id="email" placeholder="Email">
-                <label>Số điện thoại</label>
-                <input type="text" class="form-control" id="phone" placeholder="Số điện thoại">
-                <label>Địa chỉ</label>
-                <input type="text" class="form-control" id="diachi" placeholder="Địa chỉ">
+                <label>Tên sản phẩm</label>
+                <input type="text" class="form-control" id="tensp" placeholder="Tên sản phẩm" name='tensp'>
+                <label>Mã loại</label>
+                <input type="text" class="form-control" id="maloai" placeholder="Mã loại" name='maloai'>
+                <label>Hình</label>
+                <input type="file" class="form-control" id="hinh" name="image" onchange="onFileSelected(event)">
+                <label>Mô tả</label>
+                <input type="text" class="form-control" id="mota" placeholder="Mô tả">
+                <label>Giá</label>
+                <input type="text" class="form-control" id="gia" placeholder="Giá">
+                <label>Số lượng</label>
+                <input type="text" class="form-control" id="soluong" placeholder="Số lượng">
                 <br>
                 <input type="button" name="insert_data" id="button_insert" value="Insert" class="btn btn-success">
                 <!-- <input type="button" value="Close" class="btn btn-danger" > -->
@@ -36,14 +38,26 @@
     </div>
     <script src="jquery.js"></script>
     <script>
-        $('#button_insert').on('click', function () {
-            // var makh = $('#makh').val();
-            var hovaten = $('#hovaten').val();
-            var email = $('#email').val();
-            var phone = $('#phone').val();
-            var diachi = $('#diachi').val();
+        var iurl;
+        function onFileSelected(event) {
+            var selectedFile = event.target.files[0];
+            var reader = new FileReader();
 
-            if ( hovaten == '' || email == '' || phone == '' || diachi == '') {
+            reader.onload = function(event) {
+                iurl = event.target.result;
+                console.log(iurl);
+            };
+
+            reader.readAsDataURL(selectedFile);
+        }
+        $('#button_insert').on('click', function () {
+            var tensp = $('#tensp').val();
+            var maloai = $('#maloai').val();
+            var hinh = iurl;
+            var mota = $('#mota').val();
+            var gia = $('#gia').val();
+            var soluong = $('#soluong').val();
+            if (tensp == '' || maloai == '' || mota == '' || gia == '' || soluong == '') {
                 alert('Vui lòng nhập đầy đủ các trường')
             }
             else {
@@ -51,11 +65,12 @@
                     url: 'ajax_action.php',
                     method: 'POST',
                     data: {
-                        // makh: makh,
-                        hovaten: hovaten,
-                        email: email,
-                        phone: phone,
-                        diachi: diachi
+                        tensp: tensp,
+                        maloai: maloai,
+                        hinh: hinh,
+                        mota: mota,
+                        gia: gia,
+                        soluong: soluong
                     },
                     success: function (res) {
                         alert(res);

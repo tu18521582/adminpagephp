@@ -94,17 +94,6 @@
               </table>";
     ?>
     <script>
-    //     $(".delete").click(function () {
-    //     var maKH = $(this).attr("iddelete");
-    //     $(this).parent().parent().remove();
-    //     $.post("XoaKhachHang.php",
-    //         {
-    //             makhachhang: maKH
-    //         },
-    //         function (data, status) {
-
-    //         });
-    // });
     //xoa 
     $(document).on('click', '.delete', function(){
         var makh = $(this).attr('iddelete');
@@ -131,11 +120,6 @@
         $(phoneModal).val(phone);
         $(diachiModal).val(diachi);
         $(('#makh')).val(makh);
-        // $.ajax({
-        //     url: 'ajax_action.php',
-        //     method: 'POST',
-        //     data:{makh:makh}
-        // })
     })
 
     $(document).on('click', '.save', function(){

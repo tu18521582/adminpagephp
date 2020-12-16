@@ -26,9 +26,8 @@
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="#">Danh sách sản phẩm</a>
-                <a href="#">Thêm sản phẩm</a>
-                <a href="#">Thêm sản phẩm</a>
+                <a href="ListSanPham.php">Danh sách sản phẩm</a>
+                <a href="ThemSanPham.php">Thêm sản phẩm</a>
             </div>
             <button class="dropdown-btn">Hóa đơn
                 <i class="fa fa-caret-down"></i>
