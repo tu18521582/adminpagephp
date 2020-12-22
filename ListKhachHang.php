@@ -8,24 +8,119 @@
 
     <!-- Latest compiled and minified CSS & JS -->
     <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="jquery.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     
+    <script src="jquery.js"></script>
+    <style>
+        .fa-users {
+            font-size: 35px;
+            margin-top: 12px;
+            color: #3079b4;
+        }
+
+        i.fa-users {
+            display: inline-block;
+            border-radius: 60px;
+            box-shadow: 0px 0px 2px #888;
+            padding: 0.5em 0.6em;
+            background-color: white;
+        }
+
+        .header-customer {
+            width: 100%;
+            height: 100px;
+            background-color: #03bbad;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .flex {
+            display: flex;
+            margin-left: 30px;
+        }
+
+        .header-detail {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 15px;
+        }
+
+        .bold {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .refresh {
+            margin-right: 30px;
+            background-color: transparent;
+        }
+
+        li:hover {
+            background-color: #afbcc7;
+        }
+
+        li a i{
+            margin-right: 6px;
+        }
+
+        .search {
+            text-align: right;
+            margin-right: 30px;
+            margin-bottom: 10px;
+            margin-top: -10px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="navbar navbar-inverse">
-        <a class="navbar-brand" href="#">Khách hàng</a>
+    
+    <?php 
+        include "connect.php";
+        $selectCount = "select count(*) from khachhang;";
+        $rs = $connect->query($selectCount);
+        $row=mysqli_fetch_row($rs);
+        echo "
+        <div class='header-customer'>
+            <div class='flex'>
+                <span><i class='fa fa-users' aria-hidden='true'></i></span>
+                    <div class='header-detail'>
+                        <span class='bold'>Customers</span>   
+                        <span>$row[0] khách hàng</span>
+                    </div>
+            </div>
+            <div class='refresh'>
+                <button onClick='window.location.reload();' style='color: black'>
+                    <span class='glyphicon glyphicon-refresh'></span>
+                    Refresh
+                </button>
+            </div>
+        </div>
+        ";
+        $selectKH = "select * from khachhang";
+        $rs = $connect->query($selectKH);
+    ?>
+    
+    <div class="navbar navbar-default">
+        <a class="navbar-brand">Khách hàng</a>
         <ul class="nav navbar-nav">
-            <li class="active">
-                <a href="index.php">Home</a>
+            <li>
+                <a href="index.php"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
             </li>
             <li>
-                <a href="ThemKhachHang.php">Thêm khách hàng</a>
+                <a href="ThemKhachHang.php"><i class="fa fa-plus" aria-hidden="true"></i>Thêm khách hàng</a>
             </li>
         </ul>
     </div>
-    
-    <!-- Trigger the modal with a button -->
+
+    <div class='search'>
+        <span><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</span>
+        <input placeholder="Tìm kiếm tên" name='search'>
+        <button type="button" id='btnSearch'>Search</button>
+        
+    </div>
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
@@ -60,9 +155,7 @@
     <?php 
         include "connect.php";
         // include "XoaKhachHang.php";
-        $selectKH = "select * from khachhang";
-        $rs = $connect->query($selectKH);
-        echo "<table class='table table-hover'>
+        echo "<table class='table table-bordered'>
         <thead>
             <tr>
                 <th>Mã khách hàng</th>
@@ -84,8 +177,8 @@
                     <td data-target='sdt'>$row[3]</td>
                     <td data-target='diachi'>$row[4]</td>
                     <td>
-                    <button class='btn btn-danger delete' iddelete='$row[0]'>Xóa</button>
-                    <button class='btn btn-success update' data-toggle='modal' data-target='#myModal' idCapNhat='$row[0]'>Cập nhật</button>
+                    <button class='btn btn-danger delete' iddelete='$row[0]' onClick='window.location.reload();'>Xóa <i class='fa fa-trash' aria-hidden='true'></i></button>
+                    <button class='btn btn-success update' data-toggle='modal' data-target='#myModal' idCapNhat='$row[0]'>Cập nhật <span class='glyphicon glyphicon-edit'></span></button>
                     </td>
                 </tr>";
         }
@@ -143,6 +236,10 @@
                 alert('Cập nhật thành công');
             }
         })
+    })
+
+    $(document).on('click', '#btnSearch', function(){
+        alert('hello');
     })
     </script>
     <script src="//code.jquery.com/jquery.js"></script>

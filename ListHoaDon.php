@@ -78,7 +78,6 @@
                     <td data-target='thanhtien'>$row[6]</td>
                     <td data-target='ghichu'>$row[7]</td>
                     <td>
-                    <button class='btn btn-danger delete' iddelete='$row[0]'>Xóa</button>
                     <button class='btn btn-success chitiet' data-toggle='modal' data-target='#myModal' chitietid='$row[0]'>Chi tiết</button>
                     </td>
                 </tr>";

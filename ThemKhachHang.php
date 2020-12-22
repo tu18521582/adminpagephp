@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <div class="col-md-12">
-            <h3>Them khach hang</h3>
+            <h3>Thêm khách hàng</h3>
             <form action='ajax_action.php' method="post" id="insert_data_kh">
                 <!-- <label>Mã khách hàng</label>
                 <input type="text" class="form-control" id="makh" placeholder="Mã khách hàng"> -->
@@ -30,7 +30,7 @@
                 <br>
                 <input type="button" name="insert_data" id="button_insert" value="Insert" class="btn btn-success">
                 <!-- <input type="button" value="Close" class="btn btn-danger" > -->
-                <input type="button" value="Go back" onClick="javascript:history.go(-1)"  class="btn btn-danger"/>
+                <input type="button" value="Go back" onClick="javascript:history.go(-1);"  class="btn btn-danger"/>
             </form>
         </div>
     </div>

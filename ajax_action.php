@@ -74,4 +74,24 @@
 
         $result = mysqli_query($con, "DELETE FROM SANPHAM WHERE MASP='$masp'");
     }
+
+    //update sp
+    if (isset($_POST['maspUpdate'])) {
+        $maspUpdate = $_POST['maspUpdate'];
+        $tenspUpdate = $_POST['tenspUpdate'];
+        $maloaiUpdate = $_POST['maloaiUpdate'];
+        $motaUpdate = $_POST['motaUpdate'];
+        $giaUpdate = $_POST['giaUpdate'];
+        $soluongUpdate = $_POST['soluongUpdate'];
+        $hinhanhUpdate = $_POST['hinhanhUpdate'];
+
+        if ($hinhanhUpdate=='null') {
+            $sql = "UPDATE sanpham SET TENSP='$tenspUpdate', MALOAI='$maloaiUpdate', MOTA='$motaUpdate', GIA='$giaUpdate', SOLUONG='$soluongUpdate' WHERE MASP='$maspUpdate'";
+            $result = mysqli_query($con,$sql);
+        }
+        else {
+            $sql = "UPDATE sanpham SET TENSP='$tenspUpdate', MALOAI='$maloaiUpdate', MOTA='$motaUpdate', GIA='$giaUpdate', SOLUONG='$soluongUpdate', HINHCHINH='$hinhanhUpdate' WHERE MASP='$maspUpdate'";
+            $result = mysqli_query($con,$sql);
+        }
+    }
 ?>

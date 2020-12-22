@@ -79,19 +79,7 @@
                 })
             }
         })
-    //     $(document).on('click', '.delete', function(){
-    //     var makh = $(this).attr('iddelete');
-    //     console.log(makh);
-    //     $.ajax({
-    //         url: 'ajax_action.php',
-    //         method: 'POST',
-    //         data:{makh:makh},
-    //         success: function(data){
-    //             alert('Delete success');
 
-    //         }
-    //     })
-    // })
     </script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
