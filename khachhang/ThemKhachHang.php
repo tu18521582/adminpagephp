@@ -8,7 +8,10 @@
 
     <!-- Latest compiled and minified CSS & JS -->
     <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
+    
+    <!-- Latest compiled and minified JS -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    
 
 </head>
 
@@ -34,7 +37,7 @@
             </form>
         </div>
     </div>
-    <script src="jquery.js"></script>
+    <script src="./../jquery.js"></script>
     <script>
         $('#button_insert').on('click', function () {
             // var makh = $('#makh').val();
@@ -48,7 +51,7 @@
             }
             else {
                 $.ajax({
-                    url: 'ajax_action.php',
+                    url: './../ajax_action.php',
                     method: 'POST',
                     data: {
                         // makh: makh,
@@ -59,24 +62,11 @@
                     },
                     success: function (res) {
                         alert(res);
-                        // $('#insert_data_kh')[0].reset();
+                        $('#insert_data_kh')[0].reset();
                     }
                 })
             }
         })
-    //     $(document).on('click', '.delete', function(){
-    //     var makh = $(this).attr('iddelete');
-    //     console.log(makh);
-    //     $.ajax({
-    //         url: 'ajax_action.php',
-    //         method: 'POST',
-    //         data:{makh:makh},
-    //         success: function(data){
-    //             alert('Delete success');
-
-    //         }
-    //     })
-    // })
     </script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>

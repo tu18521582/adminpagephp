@@ -1,0 +1,42 @@
+.logo {
+    width: 100px;
+    margin-left: 60px;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+
+table {
+    width: 500px;
+    margin-left: 96px;
+    margin-top: 20px;
+}
+
+.title {
+    text-align: center;
+    color:#0000FF;
+    font-size: 24px;
+}
+
+.bill {
+    border: 1px solid black;
+    width:700px;
+    min-height: 400px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+}
+
+.makh {
+    margin-left: 98px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.mr-5 {
+    margin-right: 5px;
+}

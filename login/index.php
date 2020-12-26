@@ -7,30 +7,6 @@
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <!-- <form action=''method="post">
-        <label>Tài khoản</label>
-        </br>
-        <input type='text' name='name'>
-        </br>
-        <input type='password' name='password'> 
-        </br>
-        </br>
-        <input type='submit' name='submit'>
-    </form>  -->
-
-<!-- 
-    <div class="form">
-    <div class="avi"></div>
-  <form action='' method='post'>
-    <input type="text" value="Username" onfocus="this.value='';" name='name'/>
-    <input type="password" value="Password" onfocus="this.value='';" name='password'/>
-    <input type="submit" value="Login" name='submit'/>
-  </form>
-</div>form
-<div class="recovery">Forgot your password? <a href="#">Click here</a></div> -->
-
-
-
     <div class="form">
         <div class="avi"></div>
         <form action='' method='post'>
@@ -41,9 +17,12 @@
     </div><!--form-->
     </div>
     <?php 
-        include '../connect.php';
+        include './../connect.php';
+        session_start();
+        $admin = 'admin';
         if(isset($_POST['submit'])){
             if($_POST['name']=='admin' && $_POST['password']=='123456'){
+                $_SESSION['current_user'] = $admin;
                 header ('Location: ../index.php');
             }
             else {

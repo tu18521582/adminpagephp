@@ -36,7 +36,7 @@
             </form>
         </div>
     </div>
-    <script src="jquery.js"></script>
+    <script src="./../jquery.js"></script>
     <script>
         var iurl;
         function onFileSelected(event) {
@@ -62,7 +62,7 @@
             }
             else {
                 $.ajax({
-                    url: 'ajax_action.php',
+                    url: './../ajax_action.php',
                     method: 'POST',
                     data: {
                         tensp: tensp,

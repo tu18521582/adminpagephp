@@ -10,7 +10,7 @@
     <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     
-    <script src="jquery.js"></script>
+    <script src="./../jquery.js"></script>
     <style>
         .fa-users {
             font-size: 35px;
@@ -72,13 +72,26 @@
             margin-bottom: 10px;
             margin-top: -10px;
         }
+
+        #inputSearch {
+            height: 34px;
+        }
+
+        #home {
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
     
     <?php 
+        session_start();
         include "connect.php";
+        if ($_SESSION['current_user']) {
+            $a = $_SESSION['current_user'];
+            echo 'ok';
+        }
         $selectCount = "select count(*) from khachhang;";
         $rs = $connect->query($selectCount);
         $row=mysqli_fetch_row($rs);
@@ -99,15 +112,21 @@
             </div>
         </div>
         ";
-        $selectKH = "select * from khachhang";
-        $rs = $connect->query($selectKH);
+        if (isset($_POST['search'])) {
+            $searchKey = $_POST['search'];
+            $sql = "SELECT * FROM KHACHHANG WHERE hoten LIKE '%$searchKey%'";
+        }
+        else {
+            $sql = "select * from khachhang";
+        }
+        $rs = $connect->query($sql);
     ?>
     
     <div class="navbar navbar-default">
         <a class="navbar-brand">Khách hàng</a>
         <ul class="nav navbar-nav">
             <li>
-                <a href="index.php"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+                <a id='home'><i class="fa fa-home" aria-hidden="true"></i>Home</a>
             </li>
             <li>
                 <a href="ThemKhachHang.php"><i class="fa fa-plus" aria-hidden="true"></i>Thêm khách hàng</a>
@@ -116,10 +135,11 @@
     </div>
 
     <div class='search'>
-        <span><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</span>
-        <input placeholder="Tìm kiếm tên" name='search'>
-        <button type="button" id='btnSearch'>Search</button>
-        
+        <form action="" method="POST">
+            <span><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</span>
+            <input type='text' placeholder="Tìm kiếm tên" name='search' id='inputSearch'>
+            <button id='btnSearch' class='btn btn-info'>Search</button>
+        </form>
     </div>
 
     <!-- Modal -->
@@ -187,12 +207,15 @@
               </table>";
     ?>
     <script>
+    $(document).on('click', '#home',function(){
+        window.location = "http://localhost:90/adminpage/#";
+    })
     //xoa 
     $(document).on('click', '.delete', function(){
         var makh = $(this).attr('iddelete');
         $(this).parent().parent().remove();
         $.ajax({
-            url: 'ajax_action.php',
+            url: './../ajax_action.php',
             method: 'POST',
             data:{makh:makh},
             success: function(data){
@@ -223,7 +246,7 @@
         var makhUpdate = $('#makh').val();
         
         $.ajax({
-            url: 'ajax_action.php',
+            url: './../ajax_action.php',
             method: 'POST',
             data:{
                 makhUpdate:makhUpdate,
@@ -238,9 +261,6 @@
         })
     })
 
-    $(document).on('click', '#btnSearch', function(){
-        alert('hello');
-    })
     </script>
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>

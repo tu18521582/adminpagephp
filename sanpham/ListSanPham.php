@@ -9,23 +9,167 @@
     <!-- Latest compiled and minified CSS & JS -->
     <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="img.css">
-    <script src="jquery.js"></script>
+    <script src="./../jquery.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    
     <style>
-        i.fa {
+        #home:hover {
+            cursor: pointer;
+        }
+        .fa-tshirt {
+            font-size: 35px;
+            margin-top: 12px;
+            color: #3079b4;
+        }
+
+        i.fa-tshirt {
             display: inline-block;
             border-radius: 60px;
             box-shadow: 0px 0px 2px #888;
             padding: 0.5em 0.6em;
+            background-color: white;
         }
+
+        .header-customer {
+            width: 100%;
+            height: 100px;
+            background-color: #03bbad;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .flex {
+            display: flex;
+            margin-left: 30px;
+        }
+
+        .header-detail {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            margin-top: 15px;
+        }
+
+        .bold {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .refresh {
+            margin-right: 30px;
+            background-color: transparent;
+        }
+
+        li:hover {
+            background-color: #afbcc7;
+        }
+
+        li a i{
+            margin-right: 6px;
+        }
+
+        .search {
+            text-align: right;
+            margin-right: 30px;
+            margin-bottom: 10px;
+            margin-top: -10px;
+        }
+
+        #inputSearch {
+            height: 34px;
+        }
+
+        .pagination {
+            display: inline-block;
+            }
+
+            .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            }
+
+            .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            }
+
+            .pagination a:hover:not(.active) {
+            background-color: #ddd;
+            border-radius: 5px;
+            }
     </style>
 </head>
 
 <body>
-    <div class="navbar navbar-inverse">
-        <a class="navbar-brand" href="#">Sản phẩm</a>
+
+<?php 
+        include "connect.php";
+        $selectCount = "select count(*) from sanpham;";
+        $rs = $connect->query($selectCount);
+        $row=mysqli_fetch_row($rs);
+        echo "
+        <div class='header-customer'>
+            <div class='flex'>
+                <span><i class='fas fa-tshirt'></i></span>
+                    <div class='header-detail'>
+                        <span class='bold'>Products</span>   
+                        <span>$row[0] sản phẩm</span>
+                    </div>
+            </div>
+            <div class='refresh'>
+                <button onClick='window.location.reload();' style='color: black'>
+                    <span class='glyphicon glyphicon-refresh'></span>
+                    Refresh
+                </button>
+            </div>
+        </div>
+        ";
+?>
+
+<?php 
+        // define how many results you want per page
+        $results_per_page = 10;
+
+        // find out the number of results stored in database
+        $sql='SELECT * FROM sanpham';
+        $result = mysqli_query($con, $sql);
+        $number_of_results = mysqli_num_rows($result);
+
+        // determine number of total pages available
+        $number_of_pages = ceil($number_of_results/$results_per_page);
+
+        // determine which page number visitor is currently on
+        if (!isset($_GET['page'])) {
+        $page = 1;
+        } else {
+        $page = $_GET['page'];
+        }
+
+        // determine the sql LIMIT starting number for the results on the displaying page
+        $this_page_first_result = ($page-1)*$results_per_page;
+
+        // retrieve selected results from database and display them on page
+        $sql='SELECT * FROM sanpham LIMIT ' . $this_page_first_result . ',' .  $results_per_page;
+        $rs = $connect->query($sql);
+
+        if ($rs === false) {
+            echo 'lay du lieu that bai';
+        }
+?>
+    
+<div class="navbar navbar-default">
+        <a class="navbar-brand">Sản phẩm</a>
         <ul class="nav navbar-nav">
-            <li class="active">
-                <a href="index.php">Home</a>
+            <li>
+                <a id="home"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+            </li>
+            <li>
+                <a href="ThemSanPham.php"><i class="fa fa-plus" aria-hidden="true"></i>Thêm sản phẩm</a>
             </li>
         </ul>
     </div>
@@ -70,8 +214,6 @@
     <?php 
         include "connect.php";
         // include "XoaKhachHang.php";
-        $selectKH = "select * from sanpham";
-        $rs = $connect->query($selectKH);
         echo "<table class='table table-hover'>
         <thead>
             <tr>
@@ -106,14 +248,24 @@
         }
         echo "</tbody>
               </table>";
+        // display the links to the pages
+        echo "<div class='pagination'>";
+        for ($page=1;$page<=$number_of_pages;$page++) {
+            echo '<a href="ListSanPham.php?page=' . $page . '">' . $page . '</a> ';
+        }
+        echo "</div>"
     ?>
     <script>
+        $(document).ready(function () {
+            $(document).on('click', '#home',function(){
+                window.location = "http://localhost:90/adminpage/#";
+            })
     //xoa san pham
         $(document).on('click', '.delete', function(){
             var masp = $(this).attr('iddelete');
             $(this).parent().parent().remove();
             $.ajax({
-                url: 'ajax_action.php',
+                url: './../ajax_action.php',
                 method: 'POST',
                 data:{masp:masp},
                 success: function(data){
@@ -168,7 +320,7 @@
         }
         
         $.ajax({
-            url: 'ajax_action.php',
+            url: './../ajax_action.php',
             method: 'POST',
             data:{
                 // makhUpdate:makhUpdate
@@ -187,6 +339,7 @@
             }
         })
     })
+        });
     
     </script>
     <script src="//code.jquery.com/jquery.js"></script>
