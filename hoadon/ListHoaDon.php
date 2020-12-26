@@ -11,6 +11,9 @@
     <script src="./../jquery.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <style>
+        /* .hidden {
+            display: none;
+        } */
         .fa-file-invoice {
             font-size: 35px;
             margin-top: 12px;
@@ -140,8 +143,10 @@
     </div>
 
     <?php 
+        session_start();
+        $idAdmin = $_SESSION['current_admin'];
+        echo "<div id='temp' idAdmin='$idAdmin'><div>";
         include "connect.php";
-        // include "XoaKhachHang.php";
         $selectKH = "select * from hoadon";
         $rs = $connect->query($selectKH);
         echo "<table class='table table-hover'>
@@ -199,6 +204,7 @@
                     method: 'POST',
                     data:{mahd:mahd},
                     success: function(data) {
+                        console.log(data);
                         $(".modal-body").html(data);
                     }
                 })
@@ -206,10 +212,14 @@
 
             $('.duyet').click(function (){
                 var duyetid = $(this).attr('duyetid');
+                var idNguoiDuyet = $('#temp').attr('idAdmin');
                 $.ajax({
                     url: './../ajax_action.php',
                     method: 'POST',
-                    data: {duyetid: duyetid},
+                    data: {
+                        duyetid: duyetid,
+                        idnguoiduyet: idNguoiDuyet
+                    },
                     success: function(data) {
                         window.location.reload();
                     }

@@ -19,10 +19,15 @@
     <?php 
         include './../connect.php';
         session_start();
-        $admin = 'admin';
         if(isset($_POST['submit'])){
-            if(($_POST['name']=='admin' && $_POST['password']=='123456')){
-                $_SESSION['current_user'] = $admin;
+            $username = $_POST['name'];
+            $password = $_POST['password'];
+            $sql = "SELECT * FROM user WHERE TAIKHOAN='$username'";
+            $rs = $connect->query($sql);
+            $row=mysqli_fetch_row($rs);
+            if(($username==$row[2] && $password==$row[3])){
+                $_SESSION['current_admin'] = $row[0];
+                echo $_SESSION['current_admin']
                 header ('Location: ../index.php');
             }
         }?>
