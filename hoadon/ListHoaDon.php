@@ -155,6 +155,7 @@
                 <th>Giảm giá</th>
                 <th>Thành tiền</th>
                 <th>Ghi chú</th>
+                <th>Trạng thái</th>
                 <th>Chức năng</th>
             </tr>
         </thead>
@@ -162,7 +163,8 @@
         if (mysqli_num_rows($rs)>0){
           while($row=mysqli_fetch_row($rs))
         {
-          echo "<tr id='$row[0]'>
+            $status = ($row[8]==1 ? 'Đã duyệt' : 'Chưa duyệt');
+            echo "<tr id='$row[0]'>
                     <td >$row[0]</td>
                     <td data-target='makh'>$row[1]</td>
                     <td data-target='ngayhd'>$row[2]</td>
@@ -171,8 +173,11 @@
                     <td data-target='giamgia'>$row[5]</td>
                     <td data-target='thanhtien'>$row[6]</td>
                     <td data-target='ghichu'>$row[7]</td>
-                    <td>
-                        <button class='btn btn-success chitiet' data-toggle='modal' data-target='#myModal' chitietid='$row[0]'><i class='fas fa-info-circle mr-5'></i>Chi tiết</button>
+                    <td data-target='trangthai'>$status</td>
+                    <td>";
+            if ($row[8] == 1) echo "<button class='btn btn-danger mr-5' disabled>Đã duyệt</button>";
+            else echo "<button class='btn btn-info mr-5 duyet' duyetid='$row[0]'>Duyệt</button>";
+            echo        "<button class='btn btn-success chitiet' data-toggle='modal' data-target='#myModal' chitietid='$row[0]'><i class='fas fa-info-circle mr-5'></i>Chi tiết</button>
                         <a href='InHoaDon.php?id=$row[0]' target='_blank' class='btn btn-primary'><i class='fas fa-print mr-5'></i>In</a>
                     </td>
                 </tr>";
@@ -182,22 +187,35 @@
               </table>";
     ?>
     <script>
-
+        $(document).ready(function () {
             $(document).on('click', '#home',function(){
                 window.location = "http://localhost:90/adminpage/#";
             })
     //chi tiet hoa don
-        $('.chitiet').click(function (){
-            var mahd = $(this).attr('chitietid');
-            $.ajax({
-                url: './../ajax_action.php',
-                method: 'POST',
-                data:{mahd:mahd},
-                success: function(data) {
-                    $(".modal-body").html(data);
-                }
+            $('.chitiet').click(function (){
+                var mahd = $(this).attr('chitietid');
+                $.ajax({
+                    url: './../ajax_action.php',
+                    method: 'POST',
+                    data:{mahd:mahd},
+                    success: function(data) {
+                        $(".modal-body").html(data);
+                    }
+                })
             })
-        })
+
+            $('.duyet').click(function (){
+                var duyetid = $(this).attr('duyetid');
+                $.ajax({
+                    url: './../ajax_action.php',
+                    method: 'POST',
+                    data: {duyetid: duyetid},
+                    success: function(data) {
+                        window.location.reload();
+                    }
+                })
+            })
+        });
     </script>
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>

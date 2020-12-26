@@ -21,12 +21,9 @@
         session_start();
         $admin = 'admin';
         if(isset($_POST['submit'])){
-            if($_POST['name']=='admin' && $_POST['password']=='123456'){
+            if(($_POST['name']=='admin' && $_POST['password']=='123456')){
                 $_SESSION['current_user'] = $admin;
                 header ('Location: ../index.php');
-            }
-            else {
-                echo "Bạn nhập sai tài khoản hoặc mật khẩu";
             }
         }?>
     

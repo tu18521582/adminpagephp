@@ -94,4 +94,10 @@
             $result = mysqli_query($con,$sql);
         }
     }
+
+    //duyet don hang
+    if (isset($_POST['duyetid'])) {
+        $id = $_POST['duyetid'];
+        $result = mysqli_query($con, "UPDATE hoadon SET trangthai=1 where mahd='$id'");
+    }
 ?>
