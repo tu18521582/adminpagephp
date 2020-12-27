@@ -94,13 +94,13 @@
         $tenspUpdate = $_POST['tenspUpdate'];
         $maloaiUpdate = $_POST['maloaiUpdate'];
         $motaUpdate = $_POST['motaUpdate'];
-        $giaUpdate = $_POST['giaUpdate'];
+        $giaUpdate = (int)$_POST['giaUpdate'];
         $soluongUpdate = $_POST['soluongUpdate'];
         $hinhanhUpdate = $_POST['hinhanhUpdate'];
-
         if ($hinhanhUpdate=='null') {
-            $sql = "UPDATE sanpham SET TENSP='$tenspUpdate', MALOAI='$maloaiUpdate', MOTA='$motaUpdate', GIA='$giaUpdate', SOLUONG='$soluongUpdate' WHERE MASP='$maspUpdate'";
+            $sql = "UPDATE sanpham SET TENSP='$tenspUpdate', MALOAI='$maloaiUpdate', MOTA='$motaUpdate', GIA=$giaUpdate, SOLUONG='$soluongUpdate' WHERE MASP='$maspUpdate'";
             $result = mysqli_query($con,$sql);
+            var_dump($sql);exit;
         }
         else {
             $sql = "UPDATE sanpham SET TENSP='$tenspUpdate', MALOAI='$maloaiUpdate', MOTA='$motaUpdate', GIA='$giaUpdate', SOLUONG='$soluongUpdate', HINHCHINH='$hinhanhUpdate' WHERE MASP='$maspUpdate'";
@@ -118,7 +118,29 @@
 
     //log out
     if (isset($_POST['logout'])) {
-        echo 2;
         session_destroy();
+    }
+
+    //chi tiet tai khoan
+
+    if (isset($_POST['userid'])) {
+        $userid = $_POST['userid'];
+        $result = mysqli_query($con, "select * from user where userid='$userid'");
+        while ($row = mysqli_fetch_row($result)) {
+            echo "
+                <label>Mã tài khoản</label>
+                <input type='text' class='form-control' id='mahdModal' value='$row[0]' disabled>
+                <label>Mã khách hàng</label>
+                <input type='text' class='form-control' id='maspMpdal' value='$row[1]' disabled>
+                <label>Tài khoản</label>
+                <input type='text' class='form-control' id='soluongModal' value='$row[2]' disabled>
+                <label>Mật khẩu</label>
+                <input type='text' class='form-control' id='sizeModal' value='$row[3]' disabled>
+                <label>Role</label>
+                <input type='text' class='form-control' id='sizeModal' value='$row[4]' disabled>
+                <label>Họ tên</label>
+                <input type='text' class='form-control' id='sizeModal' value='$row[5]' disabled>
+            ";
+        }
     }
 ?>

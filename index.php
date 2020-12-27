@@ -186,7 +186,7 @@
    <?php 
       include "connect.php";
       session_start();
-      if (!$_SESSION){
+      if (!isset($_SESSION['current_admin'])){
          echo "<div class='mr-5'>Bạn chưa đăng nhập, vui lòng đăng nhập</div>";
          echo "<a href='login/index.php' class='btn btn-primary'>Đăng nhập</a>";
          exit;

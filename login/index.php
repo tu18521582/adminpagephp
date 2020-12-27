@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="login.css">
+    
+    <!-- Latest compiled and minified CSS -->
+    
 </head>
 <body>
     <div class="form">
@@ -13,6 +16,7 @@
         <input type="text" value="Username" onfocus="this.value='';" name='name'/>
         <input type="text" value="Password" onfocus="this.value='';" name='password'/>
         <input type="submit" value="Login" action="submit" name='submit'/>
+        <a href='RegisterForm.php' class="btn btn-primary">Register account</a>
     </form>
     </div><!--form-->
     </div>

@@ -100,7 +100,7 @@
             <div class='flex'>
                 <span><i class='fas fa-file-invoice'></i></span>
                     <div class='header-detail'>
-                        <span class='bold'>Products</span>   
+                        <span class='bold'>Invoices</span>   
                         <span>$row[0] hóa đơn</span>
                     </div>
             </div>
@@ -180,7 +180,7 @@
                     <td data-target='ghichu'>$row[7]</td>
                     <td data-target='trangthai'>$status</td>
                     <td>";
-            if ($row[8] == 1) echo "<button class='btn btn-danger mr-5' disabled>Đã duyệt</button>";
+            if ($row[6] == 1) echo "<button class='btn btn-danger mr-5' disabled>Đã duyệt</button>";
             else echo "<button class='btn btn-info mr-5 duyet' duyetid='$row[0]'>Duyệt</button>";
             echo        "<button class='btn btn-success chitiet' data-toggle='modal' data-target='#myModal' chitietid='$row[0]'><i class='fas fa-info-circle mr-5'></i>Chi tiết</button>
                         <a href='InHoaDon.php?id=$row[0]' target='_blank' class='btn btn-primary'><i class='fas fa-print mr-5'></i>In</a>

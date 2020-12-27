@@ -314,28 +314,37 @@
         reader.readAsDataURL(selectedFile);
     }
     $(document).on('click', '.save', function(){
-        
+
         if (!iurl) {
             iurl = 'null';
         }
         
+        tenspupdate1 = $(tenspmodal).val();
+        maspupdate1 = maspupdate;
+        maloaiupdate1 = $(maloaimodal).val();
+        motaupdate1 = $(motamodal).val();
+        giaupdate1 = $(giamodal).val();
+        soluongupdate1 = $(soluongmodal).val();
+
         $.ajax({
             url: './../ajax_action.php',
             method: 'POST',
             data:{
                 // makhUpdate:makhUpdate
-                maspUpdate: maspupdate,
-                tenspUpdate: tenspupdate,
-                maloaiUpdate: maloaiupdate,
-                motaUpdate: motaupdate,
-                giaUpdate: giaupdate,
-                soluongUpdate: soluongupdate,
+                maspUpdate: maspupdate1,
+                tenspUpdate: tenspupdate1,
+                maloaiUpdate: maloaiupdate1,
+                motaUpdate: motaupdate1,
+                giaUpdate: giaupdate1,
+                soluongUpdate: soluongupdate1,
                 hinhanhUpdate: iurl
                 
             },
             success:function(data){
-                // alert('Cập nhật thành công');
-                alert(data);
+                alert('Cập nhật thành công');
+                console.log(data);
+                // window.location.reload();
+
             }
         })
     })

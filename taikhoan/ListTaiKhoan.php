@@ -129,7 +129,7 @@
     <div class="modal-content">
         <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sửa thông tin khách hàng</h4>
+        <h4 class="modal-title">Chi tiết tài khoản</h4>
         </div>
         <div class="modal-body">
 
@@ -171,6 +171,7 @@
                     <td data-target='tongcong'>$row[5]</td>
                     <td>;
                         <button class='btn btn-success chitiet' data-toggle='modal' data-target='#myModal' chitietid='$row[0]'><i class='fas fa-info-circle mr-5'></i>Chi tiết</button>
+                        <button class='btn btn-danger delete' iddelete='$row[0]' onClick='window.location.reload();'>Xóa <i class='fa fa-trash' aria-hidden='true'></i></button>
                     </td>
                 </tr>";
         }
@@ -183,15 +184,26 @@
             $(document).on('click', '#home',function(){
                 window.location = "http://localhost:90/adminpage/#";
             })
-    //chi tiet hoa don
+            //chi tiet tai khoan
             $('.chitiet').click(function (){
-                var mahd = $(this).attr('chitietid');
+                var userid = $(this).attr('chitietid');
                 $.ajax({
                     url: './../ajax_action.php',
                     method: 'POST',
-                    data:{mahd:mahd},
+                    data:{userid:userid},
                     success: function(data) {
-                        console.log(data);
+                        $(".modal-body").html(data);
+                    }
+                })
+            })
+
+            $('.chitiet').click(function (){
+                var userid = $(this).attr('chitietid');
+                $.ajax({
+                    url: './../ajax_action.php',
+                    method: 'POST',
+                    data:{userid:userid},
+                    success: function(data) {
                         $(".modal-body").html(data);
                     }
                 })

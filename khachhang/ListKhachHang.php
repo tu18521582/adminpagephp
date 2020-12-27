@@ -252,6 +252,7 @@
             },
             success:function(data){
                 alert('Cập nhật thành công');
+                window.location.reload();
             }
         })
     })
