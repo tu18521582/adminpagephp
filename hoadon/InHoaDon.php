@@ -12,7 +12,7 @@
     <?php 
         include 'connect.php';
         $id = $_GET['id'];
-        $order = mysqli_query($con, "SELECT hd.MAKH,hd.NGAYHD,hd.GIAMGIA,hd.THANHTIEN, hd.TONGCONG, cthd.*, sp.TENSP, sp.GIA from 
+        $order = mysqli_query($con, "SELECT hd.MAKH,hd.NGAYHD,hd.GIAMGIA,hd.THANHTIEN, hd.HOTEN, hd.SDT, hd.DIACHI, cthd.*, sp.TENSP, sp.GIA from 
         hoadon hd join cthd on hd.MAHD=cthd.MAHD join sanpham sp on cthd.masp=sp.MASP WHERE hd.mahd=$id");
         $orders = mysqli_fetch_all($order, MYSQLI_ASSOC);
     ?>
@@ -26,16 +26,22 @@
             <br />
             -------oOo-------
         </div>
-        <span class='makh'>Mã khách hàng: <?= $orders[0]['MAKH'] ?></span>
-        <br />
-        <span class='makh'>Ngày hóa đơn: <?= $orders[0]['NGAYHD'] ?></span>
+        <span class='makh'>Mã khách hàng: </span><?= $orders[0]['MAKH'] ?>
+
+        <span class='makh'>Ngày hóa đơn: </span>  <?= $orders[0]['NGAYHD'] ?>
         <br />
 
+        <span class='makh'>Tên người nhận: </span><?= $orders[0]['HOTEN']?>
+        <br />
 
+        <span class='makh'>Số điện thoại: </span><?= $orders[0]['SDT']?>
+        <br/>
+
+        <span class='makh'>Địa chỉ:</span> <?= $orders[0]['DIACHI']?>
+        <br/>
         <table >
             <thead>
                 <tr>
-                    <th>STT</th>
                     <th>Tên</th>
                     <th>Đơn giá</th>
                     <th>Số lượng</th>
@@ -43,17 +49,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><?= $orders[0]['TENSP'] ?></td>
-                    <td><?= $orders[0]['GIA'] ?></td>
-                    <td><?= $orders[0]['SOLUONG'] ?></td>
-                    <td><?= $orders[0]['TONGCONG'] ?></td>
-                </tr>
+                <?php 
+                    $tongsotien = 0;
+                    foreach ($orders as $i=>$row) {
+                        $thanhtien = $row['GIA']*$row['SOLUONG'];
+                        $tongsotien = $tongsotien + $thanhtien;
+                        echo "
+                        <tr>
+                            <td>".$row['TENSP']."</td>
+                            <td>".$row['GIA']."</td>
+                            <td>".$row['SOLUONG']."</td>
+                            <td>".$thanhtien."</td>
+                        </tr>   
+                        ";
+                    }
+                ?>
+                
             </tbody>
         </table>
         <br />
-        <span class='makh'>Tổng tiền: <?= $orders[0]['THANHTIEN'] ?> </span>
+        <span class='makh'>Tổng tiền: <?= $tongsotien ?> </span>
     </div>
 </body>
 </html>

@@ -214,7 +214,8 @@
             method: 'POST',
             data:{makh:makh},
             success: function(data){
-                alert('Delete success');
+                alert('Xóa khách hàng thành công! ');
+                window.location.reload();
             }
         })
     })

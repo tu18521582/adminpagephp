@@ -143,4 +143,11 @@
             ";
         }
     }
+
+    //xoa tai khoan
+    if (isset($_POST['deleteID'])) {
+        $deleteID = $_POST['deleteID'];
+
+        $result = mysqli_query($con, "DELETE FROM USER WHERE USERID='$deleteID'");
+    }
 ?>

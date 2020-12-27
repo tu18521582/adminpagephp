@@ -92,7 +92,7 @@
 <body>
 <?php 
         include "connect.php";
-        $selectCount = "select count(*) from user;";
+        $selectCount = "select count(*) from user where role=1;";
         $rs = $connect->query($selectCount);
         $row=mysqli_fetch_row($rs);
         echo "
@@ -147,7 +147,7 @@
         $idAdmin = $_SESSION['current_admin'];
         echo "<div id='temp' idAdmin='$idAdmin'><div>";
         include "connect.php";
-        $selectKH = "select * from user";
+        $selectKH = "select * from user where role=1";
         $rs = $connect->query($selectKH);
         echo "<table class='table table-hover'>
         <thead>
@@ -171,7 +171,7 @@
                     <td data-target='tongcong'>$row[5]</td>
                     <td>;
                         <button class='btn btn-success chitiet' data-toggle='modal' data-target='#myModal' chitietid='$row[0]'><i class='fas fa-info-circle mr-5'></i>Chi tiết</button>
-                        <button class='btn btn-danger delete' iddelete='$row[0]' onClick='window.location.reload();'>Xóa <i class='fa fa-trash' aria-hidden='true'></i></button>
+                        <button class='btn btn-danger delete' iddelete='$row[0]''>Xóa <i class='fa fa-trash' aria-hidden='true'></i></button>
                     </td>
                 </tr>";
         }
@@ -197,33 +197,20 @@
                 })
             })
 
-            $('.chitiet').click(function (){
-                var userid = $(this).attr('chitietid');
+            $('.delete').click(function (e) { 
+                var deleteID = $(this).attr('iddelete');
                 $.ajax({
                     url: './../ajax_action.php',
                     method: 'POST',
-                    data:{userid:userid},
+                    data:{deleteID:deleteID},
                     success: function(data) {
-                        $(".modal-body").html(data);
-                    }
-                })
-            })
-
-            $('.duyet').click(function (){
-                var duyetid = $(this).attr('duyetid');
-                var idNguoiDuyet = $('#temp').attr('idAdmin');
-                $.ajax({
-                    url: './../ajax_action.php',
-                    method: 'POST',
-                    data: {
-                        duyetid: duyetid,
-                        idnguoiduyet: idNguoiDuyet
-                    },
-                    success: function(data) {
+                        alert('Xóa tài khoản thành công !');
                         window.location.reload();
                     }
                 })
-            })
+            });
+
+
         });
     </script>
     <script src="//code.jquery.com/jquery.js"></script>

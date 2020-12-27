@@ -131,7 +131,15 @@
         ";
 ?>
 
-<?php 
+<?php   
+        if (isset($_POST['search'])) {
+            $searchKey = $_POST['search'];
+            $sql = "SELECT * FROM SANPHAM WHERE TENSP LIKE '%$searchKey%'";
+        }
+        else {
+            $sql = "select * from SANPHAM";
+        }
+        $listtimkiem = $connect->query($sql);
         // define how many results you want per page
         $results_per_page = 10;
 
@@ -175,7 +183,13 @@
     </div>
     
     <!-- Trigger the modal with a button -->
-
+    <div class='search'>
+        <form action="" method="POST">
+            <span><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</span>
+            <input type='text' placeholder="Tìm kiếm tên" name='search' id='inputSearch'>
+            <button id='btnSearch' class='btn btn-info'>Search</button>
+        </form>
+    </div>
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -240,8 +254,8 @@
                     <td data-target='soluong'>$row[10]</td>
                     <td><img class='img-des' src='$row[3]'></td>
                     <td>
-                    <button class='btn btn-danger delete' iddelete='$row[0]' style='margin-bottom: 7px'>Xóa</button>
-                    <button class='btn btn-success update' data-toggle='modal' data-target='#myModal' idupdate='$row[0]'>Cập nhật</button>
+                    <button class='btn btn-danger delete' iddelete='$row[0]' style='margin-bottom: 7px'>Xóa<i class='fa fa-trash' aria-hidden='true'></i></button>
+                    <button class='btn btn-success update' data-toggle='modal' data-target='#myModal' idupdate='$row[0]'>Cập nhật  <span class='glyphicon glyphicon-edit'></span></button>
                     </td>
                 </tr>";
         }
@@ -271,6 +285,7 @@
                 success: function(data){
                     // alert('Delete success');
                     alert('Xóa thành công');
+                    window.location.reload();
                 }
             })
         })
@@ -342,9 +357,7 @@
             },
             success:function(data){
                 alert('Cập nhật thành công');
-                console.log(data);
-                // window.location.reload();
-
+                window.location.reload();
             }
         })
     })

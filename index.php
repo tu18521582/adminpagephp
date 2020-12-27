@@ -243,7 +243,8 @@
             <li>
                <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa fa-user fa-stack-1x "></i></span>Quản lý tài khoản</a>
                <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                  <li><a href="taikhoan/ListTaiKhoan.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Danh sách tài khoản</a></li>
+                  <li><a href="taikhoan/ListTaiKhoanAdmin.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Tài khoản admin</a></li>
+                  <li><a href="taikhoan/ListTaiKhoanKH.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Tài khoản khách hàng</a></li>
                </ul>
             </li>
             <li>

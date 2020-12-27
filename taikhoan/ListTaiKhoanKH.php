@@ -14,13 +14,13 @@
         /* .hidden {
             display: none;
         } */
-        .fa-file-invoice {
+        .fa-user-circle {
             font-size: 35px;
             margin-top: 12px;
             color: #3079b4;
         }
 
-        i.fa-file-invoice   {
+        i.fa-user-circle   {
             display: inline-block;
             border-radius: 60px;
             box-shadow: 0px 0px 2px #888;
@@ -92,16 +92,16 @@
 <body>
 <?php 
         include "connect.php";
-        $selectCount = "select count(*) from hoadon;";
+        $selectCount = "select count(*) from user where role=0;";
         $rs = $connect->query($selectCount);
         $row=mysqli_fetch_row($rs);
         echo "
         <div class='header-customer'>
             <div class='flex'>
-                <span><i class='fas fa-file-invoice'></i></span>
+                <span><i class='fas fa-user-circle'></i></span>
                     <div class='header-detail'>
-                        <span class='bold'>Invoices</span>   
-                        <span>$row[0] hóa đơn</span>
+                        <span class='bold'>Accounts</span>   
+                        <span>$row[0] tài khoản</span>
                     </div>
             </div>
             <div class='refresh'>
@@ -114,7 +114,7 @@
         ";
 ?>
     <div class="navbar navbar-default">
-        <a class="navbar-brand" href="#">Hóa đơn</a>
+        <a class="navbar-brand" href="#">Tài khoản</a>
         <ul class="nav navbar-nav">
             <li>
                 <a href="#" id="home">Home</a>
@@ -129,7 +129,7 @@
     <div class="modal-content">
         <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Chi tiết hóa đơn</h4>
+        <h4 class="modal-title">Chi tiết tài khoản</h4>
         </div>
         <div class="modal-body">
 
@@ -147,41 +147,31 @@
         $idAdmin = $_SESSION['current_admin'];
         echo "<div id='temp' idAdmin='$idAdmin'><div>";
         include "connect.php";
-        $selectKH = "select * from hoadon";
+        $selectKH = "select * from user where role=0";
         $rs = $connect->query($selectKH);
         echo "<table class='table table-hover'>
         <thead>
             <tr>
-                <th>Mã hóa đơn</th>
+                <th>Mã tài khoản</th>
                 <th>Mã khách hàng</th>
-                <th>Ngày hóa đơn</th>
-                <th>Giảm giá</th>
-                <th>Thành tiền</th>
-                <th>Ghi chú</th>
-                <th>Trạng thái</th>
-                <th>Chức năng</th>
+                <th>Tài khoản</th>
+                <th>Role</th>
+                <th>Họ tên</th>
             </tr>
         </thead>
         <tbody>";
         if (mysqli_num_rows($rs)>0){
           while($row=mysqli_fetch_row($rs))
         {
-                $status = ($row[8]==1 ? 'Đã duyệt' : 'Chưa duyệt');
             echo "<tr id='$row[0]'>
                     <td >$row[0]</td>
                     <td data-target='makh'>$row[1]</td>
                     <td data-target='ngayhd'>$row[2]</td>
-                    <td data-target='tongsl'>$row[3]</td>
                     <td data-target='tongcong'>$row[4]</td>
-                    <td data-target='giamgia'>$row[5]</td>
-                    <td data-target='thanhtien'>$row[6]</td>
-                    <td data-target='ghichu'>$row[7]</td>
-                    <td data-target='trangthai'>$status</td>
-                    <td>";
-            if ($row[6] == 1) echo "<button class='btn btn-danger mr-5' disabled>Đã duyệt</button>";
-            else echo "<button class='btn btn-info mr-5 duyet' duyetid='$row[0]'>Duyệt</button>";
-            echo        "<button class='btn btn-success chitiet' data-toggle='modal' data-target='#myModal' chitietid='$row[0]'><i class='fas fa-info-circle mr-5'></i>Chi tiết</button>
-                        <a href='InHoaDon.php?id=$row[0]' target='_blank' class='btn btn-primary'><i class='fas fa-print mr-5'></i>In</a>
+                    <td data-target='tongcong'>$row[5]</td>
+                    <td>;
+                        <button class='btn btn-success chitiet' data-toggle='modal' data-target='#myModal' chitietid='$row[0]'><i class='fas fa-info-circle mr-5'></i>Chi tiết</button>
+                        <button class='btn btn-danger delete' iddelete='$row[0]''>Xóa <i class='fa fa-trash' aria-hidden='true'></i></button>
                     </td>
                 </tr>";
         }
@@ -194,35 +184,33 @@
             $(document).on('click', '#home',function(){
                 window.location = "http://localhost:90/adminpage/#";
             })
-    //chi tiet hoa don
+            //chi tiet tai khoan
             $('.chitiet').click(function (){
-                var mahd = $(this).attr('chitietid');
+                var userid = $(this).attr('chitietid');
                 $.ajax({
                     url: './../ajax_action.php',
                     method: 'POST',
-                    data:{mahd:mahd},
+                    data:{userid:userid},
                     success: function(data) {
-                        console.log(data);
                         $(".modal-body").html(data);
                     }
                 })
             })
 
-            $('.duyet').click(function (){
-                var duyetid = $(this).attr('duyetid');
-                var idNguoiDuyet = $('#temp').attr('idAdmin');
+            $('.delete').click(function (e) { 
+                var deleteID = $(this).attr('iddelete');
                 $.ajax({
                     url: './../ajax_action.php',
                     method: 'POST',
-                    data: {
-                        duyetid: duyetid,
-                        idnguoiduyet: idNguoiDuyet
-                    },
+                    data:{deleteID:deleteID},
                     success: function(data) {
+                        alert('Xóa tài khoản thành công !');
                         window.location.reload();
                     }
                 })
-            })
+            });
+
+
         });
     </script>
     <script src="//code.jquery.com/jquery.js"></script>
