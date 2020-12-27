@@ -86,12 +86,7 @@
 <body>
     
     <?php 
-        session_start();
         include "connect.php";
-        if ($_SESSION['current_user']) {
-            $a = $_SESSION['current_user'];
-            echo 'ok';
-        }
         $selectCount = "select count(*) from khachhang;";
         $rs = $connect->query($selectCount);
         $row=mysqli_fetch_row($rs);

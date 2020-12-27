@@ -1,5 +1,6 @@
 <?php 
     include "connect.php";
+    session_start();
     //them
     if (isset($_POST['hovaten'])) {
         echo 'sad';
@@ -44,9 +45,11 @@
         $idNguoiDuyet = mysqli_fetch_row(mysqli_query($con, "select idnguoiduyet from hoadon where mahd='$mahd'"));
         // $selecthd = mysqli_query($con,"select hoten from hoadon where mahd='$mahd'");
         // $rownd=mysqli_fetch_row($selecthd);
-        settype($idNguoiDuyet[0], "integer");
-        $querySQL = "SELECT hoten from user where userid=$idNguoiDuyet[0]";
-        $hotennguoiduyet = mysqli_fetch_row(mysqli_query($con, $querySQL));
+        if ($idNguoiDuyet) {
+            settype($idNguoiDuyet[0], "integer");
+            $querySQL = "SELECT hoten from user where userid=$idNguoiDuyet[0]";
+            $hotennguoiduyet = mysqli_fetch_row(mysqli_query($con, $querySQL));
+        }
         while ($row = mysqli_fetch_row($result)) {
             echo "
                 <label>Mã hóa đơn</label>
@@ -57,9 +60,11 @@
                 <input type='text' class='form-control' id='soluongModal' value='$row[2]' disabled>
                 <label>Size</label>
                 <input type='text' class='form-control' id='sizeModal' value='$row[3]' disabled>
-                <label>Người duyệt</label>
-                <input type='text' class='form-control' id='sizeModal' value='$hotennguoiduyet[0]' disabled>
             ";
+            if ($hotennguoiduyet) {
+                echo "<label>Người duyệt</label>
+                <input type='text' class='form-control' id='sizeModal' value='$hotennguoiduyet[0]' disabled>";
+            }
         }
     };
 
@@ -109,5 +114,11 @@
         $nguoiduyet = $_POST['idnguoiduyet'];
         $result = mysqli_query($con, "UPDATE hoadon SET trangthai=1 where mahd='$id'");
         $rs = mysqli_query($con, "UPDATE hoadon SET idnguoiduyet=$nguoiduyet where mahd='$id'");
+    }
+
+    //log out
+    if (isset($_POST['logout'])) {
+        echo 2;
+        session_destroy();
     }
 ?>

@@ -168,19 +168,45 @@
       width: auto;
    }
 }
+   img {
+      width: 1400px;
+      margin-left: -38px;
+      margin-top: -20px;
+      height: 625px;
+   }
 
+   .mr-5 {
+      margin-right: 5px;
+   }
    </style>
    <script src='jquery.js'></script>
 </head>
 
 <body>
+   <?php 
+      include "connect.php";
+      session_start();
+      if (!$_SESSION){
+         echo "<div class='mr-5'>Bạn chưa đăng nhập, vui lòng đăng nhập</div>";
+         echo "<a href='login/index.php' class='btn btn-primary'>Đăng nhập</a>";
+         exit;
+      }
+      $userid = (int)$_SESSION['current_admin'];
+      $sql = "SELECT HOTEN FROM user where USERID = $userid";
+      $rs = $connect->query($sql);
+      $nameCurrentLogIn=mysqli_fetch_row($rs);
+   ?>
    <nav class="navbar navbar-default no-margin">
       <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header fixed-brand">
+      <div class="navbar-header fixed-brand nav-flex">
          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
-<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
-</button>
-         <a class="navbar-brand" href="#"><i class="fa fa-rocket fa-4"></i>Admin page</a>
+         <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+         </button>
+         <a class="navbar-brand" href="#"><i class="fa fa-rocket fa-4 mr-5"></i>Hello admin,<span>
+            <?php 
+               echo $nameCurrentLogIn[0];
+            ?>
+         </span></a>
       </div>
       <!-- navbar-header-->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -205,14 +231,24 @@
                </ul>
             </li>
             <li>
-               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Sản phẩm</a>
+               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-product-hunt fa-stack-1x "></i></span>Sản phẩm</a>
                <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                  <li><a href="sanpham/ListSanPham.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Danh sách sản phẩm</a></li>
-                  <li><a href="sanpham/ThemSanPham.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Thêm sản phẩm</a></li>
+                  <li><a href="sanpham/ListSanPham.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-product-hunt fa-stack-1x "></i></span>Danh sách sản phẩm</a></li>
+                  <li><a href="sanpham/ThemSanPham.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-product-hunt fa-stack-1x "></i></span>Thêm sản phẩm</a></li>
                </ul>
             </li>
             <li>
-               <a href="hoadon/ListHoaDon.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Hóa đơn</a>
+               <a href="hoadon/ListHoaDon.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-credit-card-alt fa-stack-1x "></i></span>Hóa đơn</a>
+            </li>
+            <li>
+               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa fa-user fa-stack-1x "></i></span>Quản lý tài khoản</a>
+               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                  <li><a href="taikhoan/ListTaiKhoan.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Danh sách tài khoản</a></li>
+               </ul>
+            </li>
+            <li>
+            <!-- login/index.php -->
+               <a href="login/index.php" class='logout'><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Đăng xuất</a>
             </li>
          </ul>
       </div>
@@ -222,7 +258,7 @@
          <div class="container-fluid xyz">
             <div class="row">
                <div class="col-lg-12">
-                     <h1></h1>
+                     <img src="https://pubnative.net/wp-content/uploads/2019/08/PubNative-Web-Background-Design.png">
                </div>
             </div>
          </div>
@@ -233,34 +269,47 @@
    <!-- jQuery -->
 
     <script>
-        $("#menu-toggle").click(function(e) {
-   e.preventDefault();
-   $("#wrapper").toggleClass("toggled");
-});
-$("#menu-toggle-2").click(function(e) {
-   e.preventDefault();
-   $("#wrapper").toggleClass("toggled-2");
-   $('#menu ul').hide();
-});
+         $('.logout').click(function (e) { 
+            console.log('ok');
+            var logout = 'logout';
+            $.ajax({
+                    url: 'ajax_action.php',
+                    method: 'POST',
+                    data:{logout: logout},
+                    success: function(data) {
+                        console.log(data);
+                    }
+                })
+         });
 
-function initMenu() {
-   $('#menu ul').hide();
-   $('#menu ul').children('.current').parent().show();
-   //$('#menu ul:first').show();
-   $('#menu li a').click(
-      function() {
-         var checkElement = $(this).next();
-         if ((checkElement.is('ul')) && (checkElement.is(':visible'))) {
-            return false;
+        $("#menu-toggle").click(function(e) {
+               e.preventDefault();
+               $("#wrapper").toggleClass("toggled");
+            });
+         $("#menu-toggle-2").click(function(e) {
+               e.preventDefault();
+               $("#wrapper").toggleClass("toggled-2");
+               $('#menu ul').hide();
+            });
+
+         function initMenu() {
+            $('#menu ul').hide();
+            $('#menu ul').children('.current').parent().show();
+            //$('#menu ul:first').show();
+            $('#menu li a').click(
+               function() {
+                  var checkElement = $(this).next();
+                  if ((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+                     return false;
+                  }
+                  if ((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+                     $('#menu ul:visible').slideUp('normal');
+                     checkElement.slideDown('normal');
+                     return false;
+                  }
+               }
+            );
          }
-         if ((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
-            $('#menu ul:visible').slideUp('normal');
-            checkElement.slideDown('normal');
-            return false;
-         }
-      }
-   );
-}
 $(document).ready(function() {
    initMenu();
 });
