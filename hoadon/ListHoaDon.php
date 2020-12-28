@@ -147,6 +147,9 @@
         $idAdmin = $_SESSION['current_admin'];
         echo "<div id='temp' idAdmin='$idAdmin'><div>";
         include "connect.php";
+        $total = "select sum(thanhtien) from hoadon where trangthai =1";
+        $doanhthu = $connect->query($total);
+        $dt = mysqli_fetch_row($doanhthu);
         $selectKH = "select * from hoadon";
         $rs = $connect->query($selectKH);
         echo "<table class='table table-hover'>
@@ -186,6 +189,8 @@
                 </tr>";
         }
         }
+        echo "
+             <h1 style='text-align: right;'>Doanh thu: $dt[0]  VND</h1>";
         echo "</tbody>
               </table>";
     ?>

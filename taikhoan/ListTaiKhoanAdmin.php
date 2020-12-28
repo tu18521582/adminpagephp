@@ -153,10 +153,10 @@
         <thead>
             <tr>
                 <th>Mã tài khoản</th>
-                <th>Mã khách hàng</th>
                 <th>Tài khoản</th>
                 <th>Role</th>
                 <th>Họ tên</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>";
@@ -165,11 +165,10 @@
         {
             echo "<tr id='$row[0]'>
                     <td >$row[0]</td>
-                    <td data-target='makh'>$row[1]</td>
                     <td data-target='ngayhd'>$row[2]</td>
                     <td data-target='tongcong'>$row[4]</td>
                     <td data-target='tongcong'>$row[5]</td>
-                    <td>;
+                    <td>
                         <button class='btn btn-success chitiet' data-toggle='modal' data-target='#myModal' chitietid='$row[0]'><i class='fas fa-info-circle mr-5'></i>Chi tiết</button>
                         <button class='btn btn-danger delete' iddelete='$row[0]''>Xóa <i class='fa fa-trash' aria-hidden='true'></i></button>
                     </td>
