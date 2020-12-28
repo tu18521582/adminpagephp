@@ -248,6 +248,13 @@
                </ul>
             </li>
             <li>
+               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa fa-plus fa-stack-1x "></i></span>Thống kê</a>
+               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                  <li><a href="thongke/TopSPBanChay.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x "></i></span>Top 5 sản phẩm bán chạy</a></li>
+                  
+               </ul>
+            </li>
+            <li>
             <!-- login/index.php -->
                <a href="login/index.php" class='logout'><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Đăng xuất</a>
             </li>

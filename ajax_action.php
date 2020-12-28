@@ -3,14 +3,13 @@
     session_start();
     //them
     if (isset($_POST['hovaten'])) {
-        echo 'sad';
         $hovaten = $_POST['hovaten'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $diachi = $_POST['diachi'];
         $result=mysqli_query($con, "INSERT INTO KHACHHANG (`MAKH`, `HOTEN`, `EMAIL`, `SDT`, `DIACHI`) VALUES ('', '$hovaten', '$email', '$phone', '$diachi')");
         if($result) {
-            echo $result;
+            echo 'Thêm khách hàng thành công';
         }
     }
 
@@ -20,6 +19,9 @@
         $makh = $_POST['makh'];
 
         $result = mysqli_query($con, "DELETE FROM KHACHHANG WHERE MAKH='$makh'");
+        if($result) {
+            echo 'Xóa khách hàng thành công';
+        }
     }
 
 
@@ -50,7 +52,21 @@
             $querySQL = "SELECT hoten from user where userid=$idNguoiDuyet[0]";
             $hotennguoiduyet = mysqli_fetch_row(mysqli_query($con, $querySQL));
         }
+        if ($hotennguoiduyet) {
+            echo "<label>Người duyệt  :  </label> $hotennguoiduyet[0] </br>";
+        }
+        echo " <label>Mã hóa đơn  :  </label> $mahd</br>
+                    <table class='table table-hover'>
+                        <thead>
+                            <tr>
+                                <th>Mã sản phẩm </th>
+                                <th>Số lượng</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>";
         while ($row = mysqli_fetch_row($result)) {
+            
+            /*
             echo "
                 <label>Mã hóa đơn</label>
                 <input type='text' class='form-control' id='mahdModal' value='$row[0]' disabled>
@@ -61,10 +77,13 @@
                 <label>Size</label>
                 <input type='text' class='form-control' id='sizeModal' value='$row[3]' disabled>
             ";
-            if ($hotennguoiduyet) {
-                echo "<label>Người duyệt</label>
-                <input type='text' class='form-control' id='sizeModal' value='$hotennguoiduyet[0]' disabled>";
-            }
+            */
+            echo " 
+                            <tr>
+                                <td>$row[1]</td>
+                                <td>$row[2]</td>
+                                <td>$row[3]</td>
+                            </tr>";
         }
     };
 
