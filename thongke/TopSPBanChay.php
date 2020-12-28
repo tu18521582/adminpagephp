@@ -167,6 +167,7 @@
             <tr>
                 <th>Mã sản phẩm</th>
                 <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
                 <th>Số lượng bán</th>
             </tr>
         </thead>
