@@ -19,6 +19,7 @@
         $makh = $_POST['makh'];
 
         $result = mysqli_query($con, "DELETE FROM KHACHHANG WHERE MAKH='$makh'");
+        $resultUser = mysqli_query($con, "DELETE FROM USER WHERE MAKH='$makh'");
         if($result) {
             echo 'Xóa khách hàng thành công';
         }

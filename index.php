@@ -169,7 +169,7 @@
    }
 }
    img {
-      width: 1400px;
+      width: 1102px;
       margin-left: -38px;
       margin-top: -20px;
       height: 625px;
@@ -250,8 +250,8 @@
             <li>
                <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa fa-plus fa-stack-1x "></i></span>Thống kê</a>
                <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                  <li><a href="thongke/TopSPBanChay.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x "></i></span>Top 5 sản phẩm bán chạy</a></li>
-                  
+                  <li><a href="thongke/TopSPBanChay.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x "></i></span>Top 5 bán chạy</a></li>
+                  <li><a href="./chart.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x "></i></span>Biểu đồ duyệt hàng</a></li>
                </ul>
             </li>
             <li>
@@ -266,7 +266,7 @@
          <div class="container-fluid xyz">
             <div class="row">
                <div class="col-lg-12">
-                     <img src="https://pubnative.net/wp-content/uploads/2019/08/PubNative-Web-Background-Design.png">
+                     <img src="https://image.freepik.com/free-vector/shopping-cart-online-shop-laptop-sale_115739-900.jpg?fbclid=IwAR2I9kLqxMnnq7Ce4S1p3uWB7uTvj8cIZAjxqBELzNRJiNvVoIGdjN6xXLY">
                </div>
             </div>
          </div>

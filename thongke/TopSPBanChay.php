@@ -146,7 +146,7 @@
         <a class="navbar-brand">Top 5 sản phẩm bán chạy</a>
         <ul class="nav navbar-nav">
             <li>
-                <a id="home"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+                <a id="home" href='http://localhost:90/adminpage/#'><i class="fa fa-home" aria-hidden="true"></i>Home</a>
             </li>
         </ul>
     </div>

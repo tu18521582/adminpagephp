@@ -158,7 +158,6 @@
                 <th>Mã hóa đơn</th>
                 <th>Mã khách hàng</th>
                 <th>Ngày hóa đơn</th>
-                <th>Giảm giá</th>
                 <th>Thành tiền</th>
                 <th>Ghi chú</th>
                 <th>Trạng thái</th>
@@ -174,10 +173,8 @@
                     <td >$row[0]</td>
                     <td data-target='makh'>$row[1]</td>
                     <td data-target='ngayhd'>$row[2]</td>
-                    <td data-target='tongsl'>$row[3]</td>
                     <td data-target='tongcong'>$row[4]</td>
                     <td data-target='giamgia'>$row[5]</td>
-                    <td data-target='thanhtien'>$row[6]</td>
                     <td data-target='ghichu'>$row[7]</td>
                     <td data-target='trangthai'>$status</td>
                     <td>";
