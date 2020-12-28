@@ -16,13 +16,20 @@
         #home:hover {
             cursor: pointer;
         }
-        .fa-tshirt {
+
+        .bold {
+            font-weight: bold;
+            font-size: 24px;
+            margin-top: 14px
+        }
+
+        .fa-plus {
             font-size: 35px;
             margin-top: 12px;
             color: #3079b4;
         }
 
-        i.fa-tshirt {
+        i.fa-plus {
             display: inline-block;
             border-radius: 60px;
             box-shadow: 0px 0px 2px #888;
@@ -102,6 +109,9 @@
             background-color: #ddd;
             border-radius: 5px;
             }
+        img {
+            width: 60px;
+        }
     </style>
 </head>
 
@@ -156,15 +166,23 @@
         <thead>
             <tr>
                 <th>Mã sản phẩm</th>
+                <th>Tên sản phẩm</th>
                 <th>Số lượng bán</th>
             </tr>
         </thead>
         <tbody>";
+        $arrMaSP = [];
         if (mysqli_num_rows($rs)>0){
           while($row=mysqli_fetch_row($rs))
         {
-          echo "<tr>
+            $arrMaSP[] = $row[0];
+            $sql="SELECT TENSP, HINHCHINH FROM SANPHAM WHERE MASP='$row[0]'";
+            $result=$connect->query($sql);
+            $rowSP = mysqli_fetch_row($result);
+            echo "<tr>
                     <td>$row[0]</td>
+                    <td>$rowSP[0]</td>
+                    <td><img src='$rowSP[1]'></td>
                     <td>$row[1]</td>
                 </tr>";
         }
