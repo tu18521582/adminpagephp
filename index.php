@@ -6,7 +6,16 @@
    
    <!-- Latest compiled and minified CSS -->
    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-   
+
+   <!--
+      <link href="css/bootstrap-table.css" rel="stylesheet">
+
+   -->
+   <script src="js/lumino.glyphs.js"></script>
+   <link href="css/styles.css" rel="stylesheet">
+
+   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="./jquery.js"></script>
    
    <!-- Latest compiled and minified JS -->
    <script src="//code.jquery.com/jquery.js"></script>
@@ -26,17 +35,17 @@
 }
 
 #wrapper.toggled {
-   padding-left: 250px;
+   padding-left: 300px;
    overflow: hidden;
 }
 
 #sidebar-wrapper {
    z-index: 1000;
    position: absolute;
-   left: 250px;
+   left: 300px;
    width: 0;
    height: 100%;
-   margin-left: -250px;
+   margin-left: -300px;
    overflow-y: auto;
    background: #000;
    -webkit-transition: all 0.5s ease;
@@ -46,7 +55,7 @@
 }
 
 #wrapper.toggled #sidebar-wrapper {
-   width: 250px;
+   width: 300px;
 }
 
 #page-content-wrapper {
@@ -73,7 +82,7 @@
 .sidebar-nav {
    position: absolute;
    top: 0;
-   width: 250px;
+   width: 300px;
    margin: 0;
    padding: 0;
    list-style: none;
@@ -124,25 +133,25 @@
 
 @media (min-width: 768px) {
    #wrapper {
-      padding-left: 250px;
+      padding-left: 300px;
    }
    .fixed-brand {
-      width: 250px;
+      width: 300px;
    }
    #wrapper.toggled {
       padding-left: 0;
    }
    #sidebar-wrapper {
-      width: 250px;
+      width: 300px;
    }
    #wrapper.toggled #sidebar-wrapper {
-      width: 250px;
+      width: 300px;
    }
    #wrapper.toggled-2 #sidebar-wrapper {
       width: 50px;
    }
    #wrapper.toggled-2 #sidebar-wrapper:hover {
-      width: 250px;
+      width: 300px;
    }
    #page-content-wrapper {
       padding: 20px;
@@ -155,7 +164,7 @@
    #wrapper.toggled #page-content-wrapper {
       position: relative;
       margin-right: 0;
-      padding-left: 250px;
+      padding-left: 300px;
    }
    #wrapper.toggled-2 #page-content-wrapper {
       position: relative;
@@ -196,13 +205,36 @@
       $rs = $connect->query($sql);
       $nameCurrentLogIn=mysqli_fetch_row($rs);
    ?>
+   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#"><span>GrimmDC </span>Shop</a>
+                  <ul class="user-menu">
+							<li class="dropdown pull-right">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> <?php echo $_SESSION['user_full']; ?> <span class="caret"></span></a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Hồ sơ</a></li>
+									<li><a href="logout.php"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Đăng xuất</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+									
+				</div><!-- /.container-fluid -->
+			</nav>
    <nav class="navbar navbar-default no-margin">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header fixed-brand nav-flex">
          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
          <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
          </button>
-         <a class="navbar-brand" href="#"><i class="fa fa-rocket fa-4 mr-5"></i>Hello admin,<span>
+         <a class="navbar-brand" href="#" style="color: black;"><i class="fa fa-rocket fa-4 mr-5" ></i>Hello admin,<span>
             <?php 
                echo $nameCurrentLogIn[0];
             ?>
@@ -224,17 +256,20 @@
       <div id="sidebar-wrapper">
          <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
             <li class="active">
-               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span>Khách hàng</a>
+               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span>Dashboard</a>
+            </li>
+            <li>
+               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Khách hàng</a>
                <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                  <li><a href="khachhang/ListKhachHang.php">Danh sách khách hàng</a></li>
-                  <li><a href="khachhang/ThemKhachHang.php">Thêm khách hàng</a></li>
+                  <li><a href="khachhang/ListKhachHang.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Danh sách khách hàng</a></li>
+                  <li><a href="khachhang/ThemKhachHang.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x "></i></span>Thêm khách hàng</a></li>
                </ul>
             </li>
             <li>
                <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-product-hunt fa-stack-1x "></i></span>Sản phẩm</a>
                <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                   <li><a href="sanpham/ListSanPham.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-product-hunt fa-stack-1x "></i></span>Danh sách sản phẩm</a></li>
-                  <li><a href="sanpham/ThemSanPham.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-product-hunt fa-stack-1x "></i></span>Thêm sản phẩm</a></li>
+                  <li><a href="sanpham/ThemSanPham.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x "></i></span>Thêm sản phẩm</a></li>
                </ul>
             </li>
             <li>
@@ -248,9 +283,9 @@
                </ul>
             </li>
             <li>
-               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa fa-plus fa-stack-1x "></i></span>Thống kê</a>
+               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa fa-bar-chart fa-stack-1x "></i></span>Thống kê</a>
                <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                  <li><a href="thongke/TopSPBanChay.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x "></i></span>Top 5 bán chạy</a></li>
+                  <li><a href="thongke/TopSPBanChay.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-bars fa-stack-1x "></i></span>Top 5 bán chạy</a></li>
                   <li><a href="./chart.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x "></i></span>Biểu đồ duyệt hàng</a></li>
                </ul>
             </li>
@@ -263,13 +298,19 @@
       <!-- /#sidebar-wrapper -->
       <!-- Page Content -->
       <div id="page-content-wrapper">
-         <div class="container-fluid xyz">
+         <!--
+            <div class="container-fluid xyz">
             <div class="row">
                <div class="col-lg-12">
                      <img src="https://image.freepik.com/free-vector/shopping-cart-online-shop-laptop-sale_115739-900.jpg?fbclid=IwAR2I9kLqxMnnq7Ce4S1p3uWB7uTvj8cIZAjxqBELzNRJiNvVoIGdjN6xXLY">
                </div>
             </div>
          </div>
+         -->
+         <?php
+            include "sub_index.php";
+         ?>
+    
       </div>
       <!-- /#page-content-wrapper -->
    </div>

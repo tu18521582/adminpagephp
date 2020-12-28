@@ -7,7 +7,6 @@
   </head>
   <body>
     <div id="chart_div"></div>
-    
     <?php
         include "connect.php";
         $countChuaDuyet = (int)mysqli_fetch_row($connect->query("SELECT count(*) from hoadon where TrangThai = 0"))[0];
@@ -25,7 +24,7 @@
                     ['Chưa duyệt', $countChuaDuyet],
                     ['Đã duyệt', $countDaDuyet],
                     ]);
-                    var options = {'title':'Biểu đồ sản phẩm đã duyệt và chưa duyệt',
+                    var options = {'title':'Biểu đồ hóa đơn đã duyệt và chưa duyệt',
                                 'width':800,
                                 'height':500};
                     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
