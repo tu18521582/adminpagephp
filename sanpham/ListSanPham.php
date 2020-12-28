@@ -183,13 +183,13 @@
     </div>
     
     <!-- Trigger the modal with a button -->
-    <div class='search'>
+    <!-- <div class='search'>
         <form action="" method="POST">
             <span><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</span>
             <input type='text' placeholder="Tìm kiếm tên" name='search' id='inputSearch'>
             <button id='btnSearch' class='btn btn-info'>Search</button>
         </form>
-    </div>
+    </div> -->
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
