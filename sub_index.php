@@ -3,7 +3,7 @@
     include "connect.php";
 		$count_prd = mysqli_num_rows(mysqli_query($con, "SELECT * FROM sanpham"));
         $count_user = mysqli_num_rows(mysqli_query($con, "SELECT * FROM user WHERE ROLE=1"));
-        $count_cus = mysqli_num_rows(mysqli_query($con, "SELECT * FROM user WHERE ROLE=0"));
+		$count_cus = mysqli_num_rows(mysqli_query($con, "SELECT * FROM khachhang"));
 ?>
 <div class="col-lg-12">				
 		<div class="row">
@@ -77,8 +77,8 @@
                     ['Đã duyệt', $countDaDuyet],
                     ]);
                     var options = {'title':'Biểu đồ hóa đơn đã duyệt và chưa duyệt',
-                                'width':800,
-                                'height':500};
+                                'width':600	,
+                                'height':350};
                     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
                     chart.draw(data, options);
                 }

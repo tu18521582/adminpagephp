@@ -30,6 +30,7 @@
             $row=mysqli_fetch_row($rs);
             if(($username==$row[2] && $password==$row[3])){
                 $_SESSION['current_admin'] = $row[0];
+                $_SESSION['name_admin'] = $row[5];
                 header ('Location: ../index.php');
             }
         }?>

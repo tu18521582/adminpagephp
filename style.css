@@ -11,6 +11,10 @@
   padding-top: 20px;
 }
 
+.row{
+  margin-top: -40px;
+}
+
 /* Style the sidenav links and the dropdown button */
 .sidenav a, .dropdown-btn {
   padding: 6px 8px 6px 16px;
